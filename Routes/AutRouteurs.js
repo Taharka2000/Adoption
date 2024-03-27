@@ -1,8 +1,8 @@
 const express=require("express");
 const router=require("express").Router();
 const { signupUser, loginUser,createAccount, changePassword, userProfile}=require("../Controllers/AuthControllers");
-const { addFamille, deleteFamille, findFamille, updateFamille } = require("../Controllers/AddFamille");
-const { addMineur, findMineur, updateMineur, deleteMineur } = require("../Controllers/AddMineur");
+const { addFamille, deleteFamille, findFamille, updateFamille, foundIdFamille } = require("../Controllers/AddFamille");
+const { addMineur, findMineur, updateMineur, deleteMineur, foundIdMineur } = require("../Controllers/AddMineur");
 const { isAdmin, authenticateToken, isAuthenticated} = require("../Middlewares/VerifyRoje");
 const { authenticate} = require("../Middlewares/verifyTkoen");
 const { verifyTokenAndRole } = require("../Middlewares/authMiddleware");
@@ -16,9 +16,11 @@ router.post("/addFamille",verifyTokenAndRole,addFamille)
 router.get("/getFamille",findFamille)
 router.put("/updateFamille/:id",updateFamille)
 router.delete("/deleteFamille/:id",deleteFamille)
-//ajout de famille
+router.get("/findById/:id",foundIdFamille)
+//ajout de Mineur
 router.post("/addMineur",addMineur)
 router.get("/getMineur",findMineur)
+router.get("/findById/:id",foundIdMineur)
 router.put("/updateMineur/:id",updateMineur)
 router.delete("/deleteMineur/:id",deleteMineur)
 //pour la creation du compte du agent
