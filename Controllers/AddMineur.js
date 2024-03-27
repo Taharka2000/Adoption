@@ -14,11 +14,13 @@ module.exports.addMineur = async (req, res) => {
 module.exports.findMineur = async (req, res) => {
     try {
         const allMineurs = await modelMineur.find({});
-        res.json(allMineurs);
+        const mineursCount = allMineurs.length;
+        res.json({ nombreMineur: mineursCount,allMineurs });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 module.exports.foundIdMineur = async (req, res) => {
     const id = req.params.id;
@@ -47,14 +49,14 @@ module.exports.updateMineur = async (req, res) => {
     }
 };
 
-module.exports.deleteFamille = async (req, res) => {
+module.exports.deleteMineur = async (req, res) => {
     const id = req.params.id;
     try {
-        const deletedFamille = await modelFamille.findByIdAndDelete({ _id: id });
-        if (!deletedFamille) {
+        const deletedMineur = await modelMineur.findByIdAndDelete({ _id: id });
+        if (!deletedMineur) {
             return res.status(404).json({ error: "Family not found" });
         }
-        res.json({ message: "Family deleted successfully", deletedFamille });
+        res.json({ message: "Family deleted successfully", deletedMineur });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

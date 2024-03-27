@@ -14,7 +14,8 @@ module.exports.addFamille = async (req, res) => {
 module.exports.findFamille = async (req, res) => {
     try {
         const allFamilles = await modelFamille.find({});
-        res.json(allFamilles);
+        const mineursCount = allFamilles.length;
+        res.json({nombreFamille:mineursCount,allFamilles});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
