@@ -57,3 +57,13 @@ module.exports.deleteFamille = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+module.exports.findFamilleNumber = async (req, res) => {
+    try {
+        const allFamilles = await modelFamille.find({});
+        const familleCount = allFamilles.length;
+        res.json({ nombreFamille: familleCount });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+

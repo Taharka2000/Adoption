@@ -62,3 +62,12 @@ module.exports.deleteMineur = async (req, res) => {
     }
 };
 
+module.exports.findMineurNumber = async (req, res) => {
+    try {
+        const allMineurs = await modelMineur.find({});
+        const mineurCount = allMineurs.length;
+        res.json({ nombreMineur: mineurCount });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
